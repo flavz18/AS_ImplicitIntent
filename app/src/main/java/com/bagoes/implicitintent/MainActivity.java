@@ -113,4 +113,20 @@ public class MainActivity extends AppCompatActivity {
         Intent bluetoothIntent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
         startActivity(bluetoothIntent);
     }
+    public void tampilDrive(View view)
+    {
+        try {
+            Intent driveIntent = new Intent(Intent.ACTION_MAIN);
+            driveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+            ComponentName cn = new ComponentName("com.google.android.apps.docs", "com.google.android.apps.docs.app.NewMainProxyActivity");
+            driveIntent.setComponent(cn);
+
+            startActivity(driveIntent);
+        }
+        catch (ActivityNotFoundException anfe)
+        {
+            Toast.makeText(getApplicationContext(), "Aplikasi Tidak Ditemukan", Toast.LENGTH_LONG).show();
+        }
+    }
 }

@@ -69,5 +69,10 @@
             android:layout_height="match_parent"
             android:text="Bluetooth"
             android:onClick="tampilBluetooth"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Google Drive"
+            android:onClick="tampilDrive"/>
     </LinearLayout>
 </ScrollView>
