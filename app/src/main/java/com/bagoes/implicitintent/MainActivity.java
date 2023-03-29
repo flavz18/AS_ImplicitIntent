@@ -115,7 +115,43 @@ public class MainActivity extends AppCompatActivity {
     }
     public void tampilDrive(View view)
     {
-        try {
+        ArrayList<HashMap<String,Object>> items = new ArrayList<HashMap<String, Object>>();
+        final PackageManager pm = getPackageManager();
+
+        List<PackageInfo> packs = pm.getInstalledPackages(0);
+
+        for (PackageInfo pi : packs)
+        {
+            String packageName = pi.packageName.toString();
+            String packageName_lowerCase = packageName.toLowerCase();
+
+            if (packageName_lowerCase.contains("docs"))
+            {
+                HashMap<String, Object> map = new HashMap<String, Object>();
+
+                map.put("appName", pi.applicationInfo.loadLabel(pm));
+                map.put("packageName", pi.packageName);
+
+                items.add(map);
+            }
+        }
+
+        int item_size = items.size();
+
+        if (item_size >= 1)
+        {
+            String packageName = (String) items.get(0).get("packageName");
+            Intent i = pm.getLaunchIntentForPackage(packageName);
+
+            if (i != null)
+            {
+                startActivity(i);;
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Tidak ditemukan aplikasi drive", Toast.LENGTH_SHORT);            }
+        }
+        /*try {
             Intent driveIntent = new Intent(Intent.ACTION_MAIN);
             driveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
@@ -127,6 +163,6 @@ public class MainActivity extends AppCompatActivity {
         catch (ActivityNotFoundException anfe)
         {
             Toast.makeText(getApplicationContext(), "Aplikasi Tidak Ditemukan", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 }
